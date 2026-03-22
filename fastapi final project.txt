@@ -1,0 +1,36 @@
+1.sAPI Endpoints:
+
+GET /items – Retrieve all items.
+GET /items/{item_id} – Retrieve a single item by ID.
+POST /items – Add a new item.
+PUT /items/{item_id} – Update an item’s price or stock status.
+DELETE /items/{item_id} – Delete an item.
+GET /items/filter – Filter items by category, price range, unit, or stock.
+GET /items/search – Search items by keyword (name or category).
+GET /items/sort – Sort items by any field (price, name, id) in ascending or descending order.
+GET /items/page – Paginate items (default 4 per page).
+GET /items/browse – Combine keyword search, category filter, stock filter, sort, and pagination.
+GET /items/summary – Summary of items with in-stock/out-of-stock count and category breakdown.
+
+2. Order Management:
+
+POST /orders/place – Place an order with calculation of total cost, delivery charges, and bulk discounts.
+POST /orders/create – Create an order without modifying global orders list (returns calculated amounts).
+GET /orders – Retrieve all orders.
+GET /orders/search – Search orders by customer name.
+GET /orders/sort – Sort orders by total_cost.
+GET /orders/page – Paginate orders.
+Business Logic:
+Bulk orders (quantity >=10) receive 8% discount.
+Delivery charges: Morning ₹40, Evening ₹60, Others ₹0.
+
+3. Shopping Cart
+POST /cart/add – Add items to cart (increments quantity if item already exists).
+GET /cart – View cart items and total.
+DELETE /cart/{item_id} – Remove a specific item from cart.
+POST /cart/checkout – Place all cart items as confirmed orders and clear the cart.
+Helper Functions
+find_item(item_id) – Returns item dictionary by ID.
+calculate_total(item, quantity) – Returns subtotal for a given item and quantity.
+filter_items_logic(category, min_price, max_price, unit, in_stock) – Returns filtered list of items.
+calculate_order_total(price, quantity, delivery_slot, bulk_order) – Returns detailed cost breakdown including discounts and delivery charges.
